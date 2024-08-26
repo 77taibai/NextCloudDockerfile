@@ -1,0 +1,20 @@
+FROM ubuntu:20.04
+
+WORKDIR /
+
+COPY . .
+
+RUN mv ondrej-ubuntu-php-focal.list /etc/apt/sources.list.d/ \
+    && apt update \
+    && apt install wget unzip php8.3 nginx php8.3-fpm php8.3-curl php8.3-dom php8.3-gd php8.3-mbstring php8.3-zip php8.3-pgsql php8.3-sqlite3 php8.3-mysql -y \
+    && rm /etc/nginx/sites-available/default \
+    && mv default /etc/nginx/sites-available \
+    && cd /var/www \
+    && wget https://download.nextcloud.com/server/releases/latest.zip \
+    && unzip latest.zip \
+    && rm latest.zip \
+    && chmod -R 777 /var/www/nextcloud/ 
+
+EXPOSE 80
+
+CMD service nginx start && service php8.3-fpm start
