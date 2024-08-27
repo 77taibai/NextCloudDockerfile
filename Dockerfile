@@ -19,7 +19,10 @@ RUN apt update \
     && unzip latest.zip \
     && rm latest.zip \
     && chmod -R 777 /var/www/nextcloud/ \
-    && (echo "*/5  *  *  *  * php -f /var/www/nextcloud/cron.php") | crontab -u www-data -
+    && (echo "*/5  *  *  *  * php -f /var/www/nextcloud/cron.php") | crontab -u www-data - \
+    && useradd -M -s /sbin/nologin nginx \
+    && useradd -M -s /sbin/nologin www-data \
+    && nginx -t
 
 EXPOSE 80
 
