@@ -19,5 +19,5 @@ RUN mv ondrej-ubuntu-php-focal.list /etc/apt/sources.list.d/ \
 
 EXPOSE 80
 
-CMD service nginx start && service php8.3-fpm start && service cron start
+CMD service php8.3-fpm start && service nginx start && service cron start
 
