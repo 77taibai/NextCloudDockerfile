@@ -15,13 +15,12 @@ RUN apt update \
     && rm /etc/nginx/sites-available/default \
     && mv default /etc/nginx/sites-available \
     && cd /var/www \
-    && wget https://download.nextcloud.com/server/releases/latest.zip \
+    && wget -q https://download.nextcloud.com/server/releases/latest.zip \
     && unzip latest.zip \
     && rm latest.zip \
     && chmod -R 777 /var/www/nextcloud/ \
     && (echo "*/5  *  *  *  * php -f /var/www/nextcloud/cron.php") | crontab -u www-data - \
     && useradd -M -s /sbin/nologin nginx \
-    && useradd -M -s /sbin/nologin www-data \
     && nginx -t
 
 EXPOSE 80
