@@ -4,7 +4,9 @@ WORKDIR /
 
 COPY . .
 
-RUN mv ondrej-ubuntu-php-focal.list /etc/apt/sources.list.d/ \
+RUN apt update \
+    && apt install gnupg \
+    && mv ondrej-ubuntu-php-focal.list /etc/apt/sources.list.d/ \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 71DAEAAB4AD4CAB6 \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C \
     && apt update \
