@@ -5,6 +5,8 @@ WORKDIR /
 COPY . .
 
 RUN mv ondrej-ubuntu-php-focal.list /etc/apt/sources.list.d/ \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 71DAEAAB4AD4CAB6 \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C \
     && apt update \
     && apt install tzdata cron wget unzip php8.3 nginx php8.3-fpm php8.3-curl php8.3-dom php8.3-gd php8.3-mbstring php8.3-zip php8.3-pgsql php8.3-sqlite3 php8.3-mysql -y \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -20,4 +22,3 @@ RUN mv ondrej-ubuntu-php-focal.list /etc/apt/sources.list.d/ \
 EXPOSE 80
 
 CMD service php8.3-fpm start && service nginx start && service cron start
-
