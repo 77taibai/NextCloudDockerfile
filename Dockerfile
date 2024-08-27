@@ -25,4 +25,4 @@ RUN apt update \
 
 EXPOSE 80
 
-CMD service php8.3-fpm start && service nginx start && service cron start
+CMD service php8.3-fpm start && service nginx start && service cron start && tail -f /dev/null
